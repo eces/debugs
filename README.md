@@ -1,6 +1,9 @@
-# debugs
+# debugs 🙈
 
 `npm install debugs -g`
+
+
+<img src="https://github.com/eces/debugs/blob/master/assets/debug-a.png?raw=true"> → <img src="https://github.com/eces/debugs/blob/master/assets/debug-b.png?raw=true">
 
 ## Features
 
