@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "DEBUG=$(node ../index.js --c) node index.js",
+    "debug": "node ./node_modules/debugs"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "debugs": "file:../"
+  },
+  "debugs": [
+    "api",
+    "api:user",
+    "db"
+  ]
+}
