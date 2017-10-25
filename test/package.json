@@ -10,6 +10,7 @@
   "debugs": [
     "api",
     "api:user",
-    "db"
+    "db",
+    "test-subdirectory/package.json"
   ]
 }

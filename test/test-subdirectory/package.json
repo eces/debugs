@@ -1,5 +1,6 @@
 {
   "debugs": [
-    "cache:*"
+    "cache:*",
+    "test-sub-subdirectory/package.json"
   ]
 }

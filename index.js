@@ -79,22 +79,26 @@ prompt([
     message: 'DEBUG=',
     name: 'env-debug',
     choices: () => {
-      const list = pkg.debugs.filter( e => {
-        return !e.endsWith('.json')
-      })
-
-      // resolve subdirectory json
-      pkg.debugs
-        .filter( e => {
-          return e.endsWith('.json')
-        })
-        .forEach( e => {
-          const pkg = require(path.join(process.cwd(), e))
-          if(pkg.debugs){
-            list.push(...pkg.debugs)
-          }
-        })
-      
+      // resolve debugs[] on current and subdirectory
+      require_debugs = (extra_path, base_path = process.cwd()) => {
+        const current_path = path.join(base_path, extra_path)
+        const pkg = require(current_path)
+        if(pkg.debugs){
+          const list = []
+          pkg.debugs.forEach( e => {
+            if(e.endsWith('.json')){
+              // recursively
+              list.push(...require_debugs(e, path.dirname(current_path)))
+            }else{
+              list.push(e)
+            }
+          })
+          return list
+        }else{
+          return []
+        }
+      }
+      const list = require_debugs('package.json')
         
       const current_list = list.map( e => {
         return {
@@ -117,6 +121,9 @@ prompt([
   )
   return
 }).catch( err => {
-  console.log(chalk.red(error))
+  console.log(chalk.red(err))
+  process.exit(-1)
   return
+}).then( () => {
+  process.exit(0)
 })
