@@ -1,7 +1,6 @@
 # debugs 🙈
 
-`npm install debugs -g`
-
+`npm install debugs -g` 
 
 <img src="https://github.com/eces/debugs/blob/master/assets/debug-a.png?raw=true"> → <img src="https://github.com/eces/debugs/blob/master/assets/debug-b.png?raw=true">
 
@@ -15,7 +14,10 @@
 
 ## Usage
 
-Use [debug](https://github.com/visionmedia/debug) for logging.
+Use [debug](https://github.com/visionmedia/debug) for logging. 
+
+> peerDependencies `debug` must be installed.
+
 ```js
 // Basic use of debug package.
 const debug_api = require('debug')('api')
@@ -70,10 +72,13 @@ Choose any and press enter(return).
 $ 
 ```
 
-Done
+It's done. Apply changes by `$ DEBUG=$(debugs -v) npm start` or
 
-```
-$ DEBUG=$(debugs -v) npm start
+```js
+// any-file.js
+
+// will load package.json at project directory root.
+require('debugs/init')
 ```
 
 > You may add `.debugs` to `.gitignore`.
