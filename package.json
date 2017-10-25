@@ -1,0 +1,32 @@
+{
+  "name": "debugs",
+  "version": "1.0.0",
+  "description": "UI for DEBUG=debug:*",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "cd test; npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eces/debugs.git"
+  },
+  "keywords": [
+    "debug",
+    "log",
+    "debugger",
+    "cli"
+  ],
+  "author": "Jin Lee <eces92@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eces/debugs/issues"
+  },
+  "homepage": "https://github.com/eces/debugs#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "detect-indent": "^5.0.0",
+    "inquirer": "^3.3.0"
+  },
+  "debugs": []
+}
