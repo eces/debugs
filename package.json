@@ -1,11 +1,14 @@
 {
   "name": "debugs",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "UI for DEBUG=debug:*",
-  "main": "bin/debugs",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "cd test; npm test"
+  },
+  "bin": {
+    "debugs": "bin/debugs"
   },
   "repository": {
     "type": "git",
