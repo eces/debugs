@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const path = require('path')
 const fs = require('fs')
 const chalk = require('chalk')
+const fuzzy = require('fuzzy')
 
 // returns comma joined partial value
 if (['--c', '-v', 'value'].includes(process.argv[2])) {
@@ -72,47 +73,55 @@ if(pkg.debugs.length === 0){
   return
 }
 
-const prompt = inquirer.createPromptModule()
-prompt([
+// resolve debugs[] on current and subdirectory
+require_debugs = (extra_path, base_path = process.cwd()) => {
+  const current_path = path.join(base_path, extra_path)
+  const pkg = require(current_path)
+  if(pkg.debugs){
+    const list = []
+    pkg.debugs.forEach( e => {
+      if(e.endsWith('.json')){
+        // recursively
+        list.push(...require_debugs(e, path.dirname(current_path)))
+      }else{
+        list.push(e)
+      }
+    })
+    return list
+  }else{
+    return []
+  }
+}
+const list = require_debugs('package.json')
+  
+const current_list = list.map( e => {
+  return {
+    name: e,
+    checked: current.includes(e),
+  }
+})
+current_list.unshift(new inquirer.Separator(' ~~~ '))
+
+inquirer.registerPrompt('checkbox-search', require('./custom.prompt.js'))
+inquirer.prompt([
   {
-    type: 'checkbox',
+    type: 'checkbox-search',
     message: 'DEBUG=',
     name: 'env-debug',
-    choices: () => {
-      // resolve debugs[] on current and subdirectory
-      require_debugs = (extra_path, base_path = process.cwd()) => {
-        const current_path = path.join(base_path, extra_path)
-        const pkg = require(current_path)
-        if(pkg.debugs){
-          const list = []
-          pkg.debugs.forEach( e => {
-            if(e.endsWith('.json')){
-              // recursively
-              list.push(...require_debugs(e, path.dirname(current_path)))
-            }else{
-              list.push(e)
-            }
-          })
-          return list
-        }else{
-          return []
-        }
-      }
-      const list = require_debugs('package.json')
+    pageSize: 5,
+    source: async (answers, input) => {
+      if(!input)
+        return current_list
         
-      const current_list = list.map( e => {
-        return {
-          name: e,
-          checked: current.includes(e),
+      const r = fuzzy.filter(input, current_list, {
+        extract: (e) => {
+          return e.name || ''
         }
       })
-      current_list.unshift(new inquirer.Separator(' ~~~ '))
-      
-      return current_list
+      return r.map(e => {
+        return e.string
+      })
     },
-    // validate: (answer) => {
-    //   return true
-    // }
   }
 ]).then( r => {
   fs.writeFileSync(
