@@ -77,7 +77,7 @@ Prompt.prototype.render = function (error) {
   let bottomContent = ''
 
   if (this.firstRender) {
-    message += '(Type to filter, press ' + chalk.cyan.bold('<space>') + ' to select, ' + chalk.cyan.bold('<shift>') + '+' + chalk.cyan.bold('<space>') + ' to toggle all, ' + chalk.cyan.bold('<ctrl>') + '+' + chalk.cyan.bold('<space>') + ' to inverse selection)'
+    message += '(Type to filter, press ' + chalk.cyan.bold('<arrow right>') + ' to select, ' + chalk.cyan.bold('<shift>') + '+' + chalk.cyan.bold('<arrow right>') + ' to toggle all, ' + chalk.cyan.bold('<ctrl>') + '+' + chalk.cyan.bold('<arrow right>') + ' to inverse selection)'
 
     // store initial choices to be referenced with selections and new searches
     this.initialChoices = this.currentChoices
