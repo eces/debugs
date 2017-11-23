@@ -108,7 +108,7 @@ inquirer.prompt([
     type: 'checkbox-search',
     message: 'DEBUG=',
     name: 'env-debug',
-    pageSize: 5,
+    pageSize: 6,
     source: async (answers, input) => {
       if(!input)
         return current_list
