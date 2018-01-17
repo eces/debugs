@@ -1,0 +1,12 @@
+{
+  "name": "test-peer",
+  "version": "1.0.0",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "debugs": "file:../../"
+  },
+  "debugs": [
+    "peer1",
+    "peer2"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "peer2a",
+  "version": "1.0.0",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "debugs": "file:../../../../"
+  },
+  "debugs": [
+    "../package.json"
+  ]
+}
