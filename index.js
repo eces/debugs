@@ -54,9 +54,13 @@ if(!pkg.debugs || pkg.debugs.length === undefined){
   console.log(chalk.green('"debugs": []'), chalk('added to package.json'))
 }
 
+// group .debugs state between peer folders
+const peer = require('./peer')
+const peer_base = peer.base_from_pkg('package.json')
+
 // load last checked items
 let current = []
-const file = path.join(process.cwd(), '.debugs')
+const file = path.join(peer_base, '.debugs')
 if(fs.existsSync(file)){
   try {
     const debugs = JSON.parse(fs.readFileSync(file))
@@ -125,7 +129,7 @@ inquirer.prompt([
   }
 ]).then( r => {
   fs.writeFileSync(
-    path.join(process.cwd(), '.debugs'),
+    path.join(peer_base, '.debugs'),
     JSON.stringify(r)
   )
   return

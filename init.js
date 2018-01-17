@@ -3,8 +3,11 @@ const path = require('path')
 const fs = require('fs')
 const chalk = require('chalk')
 
+const peer = require('./peer')
+const peer_base = peer.base_from_pkg('package.json')
+
 // returns comma joined partial value
-const file = path.join(process.cwd(), '.debugs')
+const file = path.join(peer_base, '.debugs')
 if(fs.existsSync(file)){
   try {
     const debugs = JSON.parse(fs.readFileSync(file))
