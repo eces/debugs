@@ -11,6 +11,7 @@
 - Loaded from `package.json` and subdirectories.
 - Replace `DEBUG=debug:*` to `DEBUG=${debugs -v}`.
 - Configure bash/zsh/shell export by typing `debugs init`.
+- See flatten debugs options over subdirectories.
 
 ## Usage
 
@@ -90,7 +91,7 @@ Running `debugs` with
 - option `--c`, `-v` and `value` will partial output `api,api:cache`.
 - option `--init`, `-i` and `init` will full output `export DEBUG=api,api:cache`.
 
-You can apply debug values by editing start script
+Edit start script to pre-apply debug values,
 
 ```bash
 "scripts": {
@@ -100,7 +101,7 @@ You can apply debug values by editing start script
 # DEBUG=$(debugs -v) nodemon index.js
 ```
 
-or editing prestart script.
+prestart script either.
 
 ```bash
 "scripts": {
@@ -110,7 +111,7 @@ or editing prestart script.
 ```
 
 
-You can use without global install like this:
+Without global install:
 
 ```bash
 # shell
@@ -126,7 +127,7 @@ $ npm install --save-dev debugs
 $ npm run debug
 ```
 
-You can include other json file or subdirectories.
+Include other json file or subdirectories.
 
 ```
 {
@@ -140,6 +141,21 @@ You can include other json file or subdirectories.
   ]
 }
 ```
+
+<kbd>NEW<kbd> Group all peer debugs into one state over subdirectories. (flatten)
+```
+.
+├── package.json
+├── peer1
+│   └── package.json
+└── peer2
+    ├── package.json
+    └── peer2a
+        └── package.json
+```
+
+Only one `.debugs` root state file will be saved, and readable from any current working directory.
+
 
 ## Authors
 
