@@ -96,7 +96,7 @@ require_debugs = (extra_path, base_path = process.cwd()) => {
     return []
   }
 }
-const list = require_debugs('package.json')
+const list = [...new Set(require_debugs('package.json'))]
   
 const current_list = list.map( e => {
   return {

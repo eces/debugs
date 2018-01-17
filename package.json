@@ -1,6 +1,6 @@
 {
   "name": "debugs",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "UI for DEBUG=debug:*",
   "main": "index.js",
   "scripts": {
